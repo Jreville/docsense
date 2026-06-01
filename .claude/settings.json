@@ -1,0 +1,10 @@
+{
+  "projectName": "DocSense",
+  "description": "Plateforme d'intelligence documentaire multi-modèles (Claude + Mistral)",
+  "contextFiles": [
+    "CLAUDE.md",
+    "notes/01 - Contexte et vision.md",
+    "notes/02 - Architecture.md",
+    "notes/03 - Stack et décisions techniques.md"
+  ]
+}

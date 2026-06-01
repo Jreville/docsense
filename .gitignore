@@ -1,0 +1,25 @@
+# Python
+worker/__pycache__/
+worker/.venv/
+worker/*.egg-info/
+worker/.env
+
+# Symfony
+api/vendor/
+api/.env.local
+api/var/
+
+# Next.js
+frontend/.next/
+frontend/node_modules/
+frontend/.env.local
+
+# Terraform
+infra/terraform/.terraform/
+infra/terraform/*.tfstate
+infra/terraform/*.tfstate.backup
+infra/terraform/*.tfvars
+
+# General
+.DS_Store
+*.log

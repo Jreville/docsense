@@ -1,0 +1,59 @@
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    environment:
+      POSTGRES_DB: docsense
+      POSTGRES_USER: docsense
+      POSTGRES_PASSWORD: docsense
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  localstack:
+    image: localstack/localstack:3
+    environment:
+      SERVICES: sqs,s3
+      DEFAULT_REGION: eu-west-3
+    ports:
+      - "4566:4566"
+    volumes:
+      - localstack_data:/var/lib/localstack
+
+  api:
+    build: ./api
+    environment:
+      DATABASE_URL: postgresql://docsense:docsense@postgres:5432/docsense
+      SQS_ENDPOINT: http://localstack:4566
+      SQS_QUEUE_URL: http://localstack:4566/000000000000/docsense-jobs
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - localstack
+
+  worker:
+    build: ./worker
+    environment:
+      SQS_ENDPOINT: http://localstack:4566
+      SQS_QUEUE_URL: http://localstack:4566/000000000000/docsense-jobs
+      S3_ENDPOINT: http://localstack:4566
+      S3_BUCKET: docsense-documents
+      DATABASE_URL: postgresql://docsense:docsense@postgres:5432/docsense
+      # ANTHROPIC_API_KEY and MISTRAL_API_KEY injected via .env or secrets
+    depends_on:
+      - postgres
+      - localstack
+
+  frontend:
+    build: ./frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+
+volumes:
+  postgres_data:
+  localstack_data:
