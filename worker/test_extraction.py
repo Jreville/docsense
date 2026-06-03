@@ -1,12 +1,3 @@
-"""
-Script de test standalone — valide que ClaudeProvider fonctionne.
-Pas besoin de FastAPI, appel direct au provider.
-
-Usage :
-    cp .env.example .env   # puis renseigner ANTHROPIC_API_KEY
-    python test_extraction.py
-"""
-
 import json
 import sys
 import io
@@ -25,7 +16,7 @@ load_dotenv(dotenv_path=Path(__file__).parent / ".env", override=True)
 DOCUMENT = """
 RAPPORT FINANCIER ANNUEL 2023
 Société : TechVision SAS
-SIRET : 812 345 678 00021
+SIRET : 999 999 999 00099
 Siège social : 14 rue de la République, 69001 Lyon
 
 1. Résultats financiers

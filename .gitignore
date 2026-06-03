@@ -5,6 +5,11 @@
 .env.local
 .env.*.local
 .env.production
+.env.dev
+**/.env
+**/.env.local
+**/.env.*.local
+**/.env.dev
 *.pem
 *.key
 *.p12
@@ -16,6 +21,10 @@ credentials/
 **/secrets.json
 **/credentials.json
 *serviceaccount*.json
+
+# JWT keys (Lexik)
+config/jwt/
+api/config/jwt/
 
 # AWS
 .aws/
@@ -66,6 +75,7 @@ api/vendor/
 api/var/
 api/.env.local
 api/.env.*.local
+api/.env.dev
 api/public/bundles/
 api/.php-cs-fixer.cache
 api/.phpunit.result.cache
@@ -106,6 +116,19 @@ desktop.ini
 # DOCKER
 # =============================================================================
 docker-compose.override.yml
+
+# =============================================================================
+# COMPOSER (racine projet — accidentel)
+# =============================================================================
+/composer.json
+/composer.lock
+/vendor/
+
+# =============================================================================
+# UPLOADS locaux (worker dev)
+# =============================================================================
+api/var/uploads/
+worker/var/
 
 # =============================================================================
 # MISC
